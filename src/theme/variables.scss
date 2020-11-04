@@ -2,13 +2,11 @@
 // http://ionicframework.com/docs/theming/
 
 /** Ionic CSS Variables **/
+/** Background**/
+ion-card {
+  --background: white !important;
+}
 :root {
-
-  /** Background**/
-  --ion-background-color: linear-gradient(to right, #fbffff 0%, #f9fdff 100%);
-  ion-card {
-    --background: white !important;
-  }
 
   /** primary **/
 
