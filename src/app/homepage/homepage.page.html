@@ -6,7 +6,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content  >
   <ion-header collapse="condense">
     <ion-toolbar>
       <ion-title size="large">Seja Bem-Vindo</ion-title>
@@ -24,50 +24,47 @@
       and climb a mountain or spend a week in the woods. Wash your spirit clean.
     </ion-card-content>
   </ion-card>
-
   <ion-card>
     <ion-card-header>
       <ion-card-subtitle>Ultimas medições</ion-card-subtitle>
     </ion-card-header>
     <ion-grid>
       <ion-row>
-      <ion-button color="primary">Dia</ion-button>
-      <ion-button color="primary">7 Dias</ion-button>
-      <ion-button color="primary">Mês</ion-button>
-      <ion-button color="primary">Ano</ion-button>
+        <ion-col class="ion-align-items-center">
+          <ion-button color="primary">Dia</ion-button>
+        </ion-col>
+        <ion-col class="ion-align-items-center">
+          <ion-button color="primary">7 Dias</ion-button>
+        </ion-col>
+        <ion-col class="ion-align-items-center">
+        <ion-button color="primary">Mês</ion-button>
+      </ion-col>
+        <ion-col class="ion-align-items-center">
+          <ion-button color="primary">Ano</ion-button>
+        </ion-col>
       </ion-row>
     </ion-grid>
   </ion-card>
 
-  <ion-item>
-    <ion-avatar slot="start">
-      <img src="./avatar-finn.png">
-    </ion-avatar>
-    <ion-label>
-      <h2>Finn</h2>
-      <h3>I'm a big deal</h3>
-      <p>Listen, I've had a pretty messed up day...</p>
-    </ion-label>
-  </ion-item>
-  <ion-item>
-    <ion-avatar slot="start">
-      <img src="./avatar-han.png">
-    </ion-avatar>
-    <ion-label>
-      <h2>Han</h2>
-      <h3>Look, kid...</h3>
-      <p>I've got enough on my plate as it is, and I...</p>
-    </ion-label>
-  </ion-item>
-  <ion-item>
-    <ion-avatar slot="start">
-      <img src="./avatar-rey.png">
-    </ion-avatar>
-    <ion-label>
-      <h2>Rey</h2>
-      <h3>I can handle myself</h3>
-      <p>You will remove these restraints and leave...</p>
-    </ion-label>
-  </ion-item>
   <!--<app-explore-container name="Tab 1 page"></app-explore-container>-->
+</ion-content>
+<ion-content>
+  <ion-card>
+
+    <ion-list>
+      <ion-item *ngFor="let medicao of medicoes">
+        <ion-avatar style="background-color: #2dd36f" slot="start" *ngIf="medicao.ValorMedicao <= 126">
+          <img src="./assets/icon/feliz.png">
+        </ion-avatar>
+        <ion-avatar style="background-color:orange" slot="start" *ngIf="medicao.ValorMedicao >= 127">
+          <img src="./assets/icon/cetico.png">
+        </ion-avatar>
+        <ion-label>
+          <ion-label  class="labelValor">{{medicao.ValorMedicao}} Mg/L</ion-label>
+          <ion-label class="labelData" >{{medicao.Data | date : "dd.MMMM.y"}}</ion-label>
+          <!-- <h4 >{{medicao.Data | date : "hh:mm:ss"}}</h4>-->
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-card>
 </ion-content>
