@@ -3,7 +3,15 @@
 
 /** Ionic CSS Variables **/
 :root {
+
+  /** Background**/
+  --ion-background-color: linear-gradient(to right, #fbffff 0%, #f9fdff 100%);
+  ion-card {
+    --background: white !important;
+  }
+
   /** primary **/
+
   --ion-color-primary: #e32a31;
   --ion-color-primary-rgb: 56, 128, 255;
   --ion-color-primary-contrast: #ffffff;

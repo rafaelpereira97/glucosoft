@@ -51,7 +51,10 @@ export class HomepagePage implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    if (this.current <= 126){
+
+      const LastValue = this.medicoes[this.medicoes.length - 1 ];
+      this.current = LastValue.ValorMedicao;
+      if (this.current <= 126){
         this.color = '#04b50a';
     }else if (this.current >= 127 && this.current < 226) {
         this.color = '#fabd05';
