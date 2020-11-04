@@ -6,7 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./homepage.page.scss'],
 })
 export class HomepagePage implements OnInit {
-
+    max = 500;
+    current = 126;
+    color = '';
   medicoes: [{ Data: Date; Id: number; ValorMedicao: number }, { Data: Date; Id: number; ValorMedicao: number }, { Data: Date; Id: number; ValorMedicao: number }, { Data: Date; Id: number; ValorMedicao: number }, { Data: Date; Id: number; ValorMedicao: number }, { Data: Date; Id: number; ValorMedicao: number }, { Data: Date; Id: number; ValorMedicao: number }] =
       [
         {
@@ -49,7 +51,13 @@ export class HomepagePage implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log(this.medicoes);
+    if (this.current <= 126){
+        this.color = '#04b50a';
+    }else if (this.current >= 127 && this.current < 226) {
+        this.color = '#fabd05';
+    }else{
+        this.color = '#c42902';
+    }
   }
 
 }

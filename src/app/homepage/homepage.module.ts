@@ -8,11 +8,14 @@ import { HomepagePageRoutingModule } from './homepage-routing.module';
 
 import { HomepagePage } from './homepage.page';
 
+import {RoundProgressModule} from 'angular-svg-round-progressbar';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    RoundProgressModule,
     HomepagePageRoutingModule
   ],
   declarations: [HomepagePage]
