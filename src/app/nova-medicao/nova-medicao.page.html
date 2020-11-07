@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text="Voltar"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Inserir Medição</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-header>
+    <ion-toolbar>
+      <ion-title size="large">Registar Nova Medição</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <form (ngSubmit)="logForm()">
+    <ion-item>
+      <ion-label position="floating">Mg/L</ion-label>
+      <ion-input type="number"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Mg/L</ion-label>
+      <ion-input type="number"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Mg/L</ion-label>
+      <ion-input type="number"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Mg/L</ion-label>
+      <ion-input type="number"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Mg/L</ion-label>
+      <ion-input type="number"></ion-input>
+    </ion-item>
+
+
+    <ion-button style="width:100%" type="submit" shape="round">Registar Medição</ion-button>
+
+
+  </form>
+</ion-content>
