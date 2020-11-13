@@ -1,10 +1,13 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import {IonicStorageModule} from '@ionic/storage';
+import {WizardguardGuard} from './guards/wizardguard.guard';
 
 const routes: Routes = [
   {
-    path: '',
-    loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
+    path: 'tabs',
+    loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule),
+    canActivate: [WizardguardGuard]
   },
   {
     path: 'homepage',
@@ -17,11 +20,18 @@ const routes: Routes = [
   {
     path: 'nova-medicao',
     loadChildren: () => import('./nova-medicao/nova-medicao.module').then( m => m.NovaMedicaoPageModule)
+  },
+  {
+    path: '',
+    loadChildren: () => import('./wizard/wizard.module').then( m => m.WizardPageModule),
+    canActivate: [WizardguardGuard]
   }
+
 ];
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
+    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }),
+    IonicStorageModule.forRoot(),
   ],
   exports: [RouterModule]
 })

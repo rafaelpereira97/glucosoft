@@ -11,7 +11,7 @@ export class HomepagePage implements OnInit {
     current = 126;
     color = '';
 
-      medicoes: [{ Data: Date; Id: number; ValorMedicao: number }, { Data: Date; Id: number; ValorMedicao: number }, { Data: Date; Id: number; ValorMedicao: number }, { Data: Date; Id: number; ValorMedicao: number }, { Data: Date; Id: number; ValorMedicao: number }, { Data: Date; Id: number; ValorMedicao: number }, { Data: Date; Id: number; ValorMedicao: number }] =
+      medicoes: [{ Data: Date; Id: number; ValorMedicao: number }, { Data: Date; Id: number; ValorMedicao: number }, { Data: Date; Id: number; ValorMedicao: number }, { Data: Date; Id: number; ValorMedicao: number }, { Data: Date; Id: number; ValorMedicao: number }, { Data: Date; Id: number; ValorMedicao: number }, { Data: Date; Id: number; ValorMedicao: number } , { Data: Date; Id: number; ValorMedicao: number }] =
           [
             {
               Id: 1,
@@ -46,6 +46,11 @@ export class HomepagePage implements OnInit {
               {
                   Id: 6,
                   ValorMedicao: 190,
+                  Data: new Date(),
+              },
+              {
+                  Id: 7,
+                  ValorMedicao: 90,
                   Data: new Date(),
               },
 

@@ -11,7 +11,7 @@
           <ion-col class="ion-align-items-center">
           <round-progress class="grafico" [semicircle]="true"
                           [current]="current" [color]="color"
-                          [radius]="60" [stroke]="10" [max]="max">
+                          [radius]="45" [stroke]="7" [max]="max">
           </round-progress>
             <h1 style="margin-top: -30%; text-align: center"><b>{{current}} Mg/L</b></h1>
             <br><br><br>
@@ -23,6 +23,7 @@
     </ion-card-content>
   </ion-card>
   <ion-card>
+
     <ion-card-header>
       <ion-card-subtitle>Ultimas medições</ion-card-subtitle>
     </ion-card-header>
@@ -42,10 +43,6 @@
         </ion-col>
       </ion-row>
     </ion-grid>
-  </ion-card>
-
-
-  <ion-card>
     <ion-list>
       <ion-item *ngFor="let medicao of medicoes">
         <ion-avatar style="background-color: #2dd36f" slot="start" *ngIf="medicao.ValorMedicao <= 126">
@@ -62,6 +59,11 @@
       </ion-item>
     </ion-list>
   </ion-card>
+
+
+
+
+
 
 
   <!--<app-explore-container name="Tab 1 page"></app-explore-container>-->

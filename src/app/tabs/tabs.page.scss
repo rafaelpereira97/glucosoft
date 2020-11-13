@@ -1,6 +1,7 @@
 ion-tabs{
+
   ion-fab {
-    margin-bottom: env(safe-area-inset-bottom); /* fix notch ios*/
+    margin-bottom: env(safe-area-inset-bottom,20px); /* fix notch ios*/
     ion-fab-button {
       --box-shadow: none;
     }
@@ -12,12 +13,13 @@ ion-tabs{
     bottom: 0;
     left:0; right: 0;
     width: 100%;
+    contain: none ;
     &:after{
       content: " ";
       width: 100%;
       bottom: 0;
       background: var(--ion-color-light);
-      height: env(safe-area-inset-bottom);
+      height: env(safe-area-inset-bottom,20px);
       position: absolute;
     }
     ion-tab-button {
