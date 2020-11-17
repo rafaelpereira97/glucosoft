@@ -1,0 +1,34 @@
+ion-avatar {
+  &.has-status {
+    position: relative;
+  }
+
+  &.avatar-sm {
+    width: 30px;
+    height: 30px;
+  }
+
+  &.avatar-md {
+    width: 56px;
+    height: 56px;
+  }
+
+  &.avatar-lg {
+    display: inline-block;
+    width: 88px;
+    height: 88px;
+  }
+
+  .avatar-status {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+  }
+
+  .online-status {
+    width: 16px;
+    height: 16px;
+    border: 3px solid #fff;
+  }
+}
+
