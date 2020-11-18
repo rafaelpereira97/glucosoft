@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {DbServiceService} from "../DB/db-service.service";
 
 @Component({
   selector: 'app-nova-medicao',
@@ -8,9 +9,10 @@ import { Component, OnInit } from '@angular/core';
 export class NovaMedicaoPage implements OnInit {
     date: any;
 
-  constructor() { }
+  constructor(private dbservice: DbServiceService) { }
 
   ngOnInit() {
+    this.dbservice.InsertRegisto();
   }
 
 }
