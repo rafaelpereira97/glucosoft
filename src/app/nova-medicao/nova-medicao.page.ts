@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./nova-medicao.page.scss'],
 })
 export class NovaMedicaoPage implements OnInit {
+    date: any;
 
   constructor() { }
 
