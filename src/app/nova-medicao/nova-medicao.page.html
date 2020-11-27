@@ -11,14 +11,14 @@
 
 
 
-  <form (ngSubmit)="logGlucose()">
+  <form [formGroup]="MedicoesFrom" (ngSubmit)="InsereRegisto()">
     <ion-item>
       <ion-label position="floating">Açucar no Sangue (mmol/L)</ion-label>
-      <ion-input type="number"></ion-input>
+      <ion-input formControlName="Glucose" type="number"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="floating">Altura da medição</ion-label>
-      <ion-select>
+      <ion-select formControlName="Moment">
         <ion-select-option value="Antes do Pequeno Almoço">Antes do Pequeno Almoço</ion-select-option>
         <ion-select-option value="Depois do Pequeno Almoço">Depois do Pequeno Almoço</ion-select-option>
         <ion-select-option value="Antes do Almoço">Antes do Almoço</ion-select-option>
@@ -29,17 +29,17 @@
         <ion-select-option value="Ao acordar">Ao acordar</ion-select-option>
       </ion-select>
     </ion-item>
-    <ion-item>
+    <ion-item >
       <ion-label position="floating">Data da Medição</ion-label>
-      <ion-datetime displayFormat="DD/MM/YYYY HH:mm:ss" display-timezone="utc" placeholder="Selecionar Data..."></ion-datetime>
+      <ion-datetime formControlName="DateAdd" displayFormat="DD/MM/YYYY HH:mm:ss" display-timezone="utc" placeholder="Selecionar Data..."></ion-datetime>
     </ion-item>
     <ion-item>
       <ion-label position="floating">Calorias gastas</ion-label>
-      <ion-input></ion-input>
+      <ion-input type="number" formControlName="Kcal"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="floating">Notas</ion-label>
-      <ion-textarea></ion-textarea>
+      <ion-textarea type="text" formControlName="Notes"></ion-textarea>
     </ion-item>
 
 

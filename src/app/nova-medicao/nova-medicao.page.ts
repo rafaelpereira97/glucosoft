@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {DbServiceService} from "../DB/db-service.service";
+import {DbServiceService} from '../DB/db-service.service';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-nova-medicao',
@@ -8,11 +9,28 @@ import {DbServiceService} from "../DB/db-service.service";
 })
 export class NovaMedicaoPage implements OnInit {
     date: any;
-
-  constructor(private dbservice: DbServiceService) { }
+    MedicoesFrom: FormGroup;
+  constructor(private dbservice: DbServiceService, private formBuilder: FormBuilder) { }
 
   ngOnInit() {
-    this.dbservice.InsertRegisto();
+    this.MedicoesFrom = this.createMedicoesFrom();
   }
+
+  createMedicoesFrom(): FormGroup
+  {
+    return this.formBuilder.group({
+      Glucose: [0, Validators.required],
+      Moment: ['' , Validators.required],
+      DateAdd: [new Date(), Validators.required],
+      Kcal: [0], // Este valor vem da api da saude
+      Notes: [''],
+
+    });
+  }
+InsereRegisto(){
+  const Data = this.MedicoesFrom.getRawValue();
+  const Resultado = this.dbservice.InsertRegisto(Data);
+  console.log(Data);
+}
 
 }
