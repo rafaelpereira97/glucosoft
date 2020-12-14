@@ -21,16 +21,16 @@ export class NovaMedicaoPage implements OnInit {
     return this.formBuilder.group({
       Glucose: [0, Validators.required],
       Moment: ['' , Validators.required],
-      DateAdd: [new Date(), Validators.required],
+      DateAdd: [new Date().toISOString(), Validators.required],
       Kcal: [0], // Este valor vem da api da saude
       Notes: [''],
 
     });
   }
-InsereRegisto(){
-  const Data = this.MedicoesFrom.getRawValue();
-  const Resultado = this.dbservice.InsertRegisto(Data);
-  console.log(Data);
-}
+  InsereRegisto(){
+    const Data = this.MedicoesFrom.getRawValue();
+    const Resultado = this.dbservice.InsertRegisto(Data);
+    console.log('RESULTADINHOOOOOO', Resultado);
+  }
 
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {DbServiceService} from "../DB/db-service.service";
 
 @Component({
   selector: 'app-homepage',
@@ -10,7 +11,7 @@ export class HomepagePage implements OnInit {
     max = 500;
     current = 126;
     color = '';
-
+    items: any;
       medicoes: [{ Data: Date; Id: number; ValorMedicao: number }, { Data: Date; Id: number; ValorMedicao: number }, { Data: Date; Id: number; ValorMedicao: number }, { Data: Date; Id: number; ValorMedicao: number }, { Data: Date; Id: number; ValorMedicao: number }, { Data: Date; Id: number; ValorMedicao: number }, { Data: Date; Id: number; ValorMedicao: number } , { Data: Date; Id: number; ValorMedicao: number }] =
           [
             {
@@ -50,14 +51,22 @@ export class HomepagePage implements OnInit {
               },
               {
                   Id: 7,
-                  ValorMedicao: 90,
+                  ValorMedicao: 180,
                   Data: new Date(),
               },
 
     ];
-  constructor() { }
+  constructor(private dbservice: DbServiceService) { }
 
   ngOnInit() {
+
+      /*this.dbservice.getRegistos().then((r) => {
+          if (r.res.rows.length > 0) {
+              for (let i = 0; i < r.res.rows.length; i++) {
+                  this.items.push(r.res.rows.item(i));
+              }
+          }
+      });*/
 
       const LastValue = this.medicoes[this.medicoes.length - 1 ];
       this.current = LastValue.ValorMedicao;
