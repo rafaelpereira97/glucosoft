@@ -9,7 +9,7 @@ import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
 })
 export class HomepagePage implements OnInit {
 
-    max = 500;
+    max = 300;
     current = 0;
     color = '';
     registos: Array<any>;
