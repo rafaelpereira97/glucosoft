@@ -43,4 +43,11 @@ export class DbServiceService {
     getRegistos(){
         return this.database.executeSql("SELECT * FROM Registos");
     }
+
+    openDatabaseConnection(){
+        return this.sqlite.create({
+            name: 'data.db',
+            location: 'default'
+        });
+    }
 }

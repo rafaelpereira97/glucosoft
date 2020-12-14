@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {DbServiceService} from '../DB/db-service.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {NavController} from "@ionic/angular";
 
 @Component({
   selector: 'app-nova-medicao',
@@ -10,7 +11,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 export class NovaMedicaoPage implements OnInit {
     date: any;
     MedicoesFrom: FormGroup;
-  constructor(private dbservice: DbServiceService, private formBuilder: FormBuilder) { }
+  constructor(private dbservice: DbServiceService, private formBuilder: FormBuilder, public navCtrl: NavController) { }
 
   ngOnInit() {
     this.MedicoesFrom = this.createMedicoesFrom();
@@ -29,8 +30,11 @@ export class NovaMedicaoPage implements OnInit {
   }
   InsereRegisto(){
     const Data = this.MedicoesFrom.getRawValue();
-    const Resultado = this.dbservice.InsertRegisto(Data);
-    console.log('RESULTADINHOOOOOO', Resultado);
+    this.dbservice.InsertRegisto(Data);
+
+    this.navCtrl.navigateBack('tabs/tabs/homepage').then(() => {
+      window.location.reload();
+    });
   }
 
 }

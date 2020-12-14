@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {DbServiceService} from "../DB/db-service.service";
+import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
 
 @Component({
   selector: 'app-homepage',
@@ -9,75 +10,45 @@ import {DbServiceService} from "../DB/db-service.service";
 export class HomepagePage implements OnInit {
 
     max = 500;
-    current = 126;
+    current = 0;
     color = '';
-    items: any;
-      medicoes: [{ Data: Date; Id: number; ValorMedicao: number }, { Data: Date; Id: number; ValorMedicao: number }, { Data: Date; Id: number; ValorMedicao: number }, { Data: Date; Id: number; ValorMedicao: number }, { Data: Date; Id: number; ValorMedicao: number }, { Data: Date; Id: number; ValorMedicao: number }, { Data: Date; Id: number; ValorMedicao: number } , { Data: Date; Id: number; ValorMedicao: number }] =
-          [
-            {
-              Id: 1,
-              ValorMedicao: 127,
-              Data: new Date(),
-            },
-            {
-              Id: 2,
-              ValorMedicao: 122,
-              Data: new Date(),
-            },
-            {
-              Id: 3,
-              ValorMedicao: 90,
-              Data: new Date(),
-            },
-            {
-              Id: 4,
-              ValorMedicao: 180,
-              Data: new Date(),
-            },
-            {
-              Id: 4,
-              ValorMedicao: 190,
-              Data: new Date(),
-            },
-              {
-                  Id: 5,
-                  ValorMedicao: 190,
-                  Data: new Date(),
-              },
-              {
-                  Id: 6,
-                  ValorMedicao: 190,
-                  Data: new Date(),
-              },
-              {
-                  Id: 7,
-                  ValorMedicao: 180,
-                  Data: new Date(),
-              },
+    registos: Array<any>;
 
-    ];
-  constructor(private dbservice: DbServiceService) { }
+  constructor(private db: DbServiceService) {
 
-  ngOnInit() {
-
-      /*this.dbservice.getRegistos().then((r) => {
-          if (r.res.rows.length > 0) {
-              for (let i = 0; i < r.res.rows.length; i++) {
-                  this.items.push(r.res.rows.item(i));
-              }
-          }
-      });*/
-
-      const LastValue = this.medicoes[this.medicoes.length - 1 ];
-      this.current = LastValue.ValorMedicao;
-      if (this.current <= 126){
-        this.color = '#04b50a';
-    }else if (this.current >= 127 && this.current < 226) {
-        this.color = '#fabd05';
-    }else{
-        this.color = '#c42902';
-    }
   }
 
+    ngOnInit() {
+
+    }
+
+  ionViewWillEnter(){
+      this.getAllRegistos();
+  }
+
+     getAllRegistos(){
+          this.db.openDatabaseConnection().then((db: SQLiteObject) => {
+              db.executeSql("SELECT * FROM Registos ORDER BY DateAdd DESC", []).then((data) => {
+                  this.registos = [];
+                  if(data.rows.length > 0) {
+                      for(let i = 0; i < data.rows.length; i++) {
+                          this.registos.push(data.rows.item(i));
+                      }
+                  }
+                  const LastValue = this.registos[0];
+
+                  this.current = LastValue.Glucose;
+                  if (this.current <= 126){
+                      this.color = '#04b50a';
+                  }else if (this.current >= 127 && this.current < 226) {
+                      this.color = '#fabd05';
+                  }else{
+                      this.color = '#c42902';
+                  }
+              }, (e) => {
+                  console.log("Error: " + JSON.stringify(e));
+              });
+          });
+}
 }
 
