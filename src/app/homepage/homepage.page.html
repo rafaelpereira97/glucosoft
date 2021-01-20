@@ -60,8 +60,8 @@
             <ion-label>Este Ano</ion-label>
           </ion-segment-button>
         </ion-segment>
-      <ion-list>
-        <ion-item *ngFor="let medicao of registos">
+      <ion-list style="width: 100% ; background-color: white">
+        <ion-item style="background-color: white !important;" *ngFor="let medicao of registos">
           <ion-avatar style="background-color: #2dd36f" slot="start" *ngIf="medicao.Glucose <= 126">
             <img src="./assets/icon/feliz.png">
           </ion-avatar>

@@ -5,6 +5,7 @@ import { DatePipe } from '@angular/common';
 import { NFC, Ndef } from '@ionic-native/nfc/ngx';
 import { ToastController } from '@ionic/angular';
 import {NavigationExtras, Router} from '@angular/router';
+import { Health } from '@ionic-native/health/ngx';
 
 
 @Component({
@@ -19,9 +20,15 @@ export class HomepagePage implements OnInit {
     max = 300;
     current = 0;
     color = '';
+    Segment: any;
     registos: Array<any>;
 
-  constructor(private db: DbServiceService, public datepipe: DatePipe,private nfc: NFC, private ndef: Ndef,public toastController: ToastController,private router: Router) {
+  constructor(private db: DbServiceService,
+              public datepipe: DatePipe ,
+              private nfc: NFC, private ndef: Ndef,
+              public toastController: ToastController,
+              private router: Router,
+              private health: Health) {
       this.nfc.addTagDiscoveredListener(() => {
 
       }, (err) => {
@@ -35,10 +42,26 @@ export class HomepagePage implements OnInit {
 
           this.router.navigate(['/nova-medicao'], navigationExtras);
       });
+
+   /*   this.health.isAvailable()
+          .then((available: boolean) => {
+              console.log(available);
+              this.health.requestAuthorization([
+                  'distance', 'nutrition',
+                  {
+                      read: ['steps'],
+                      write: ['height', 'weight']
+                  }
+              ])
+                  .then(res => console.log(res))
+                  .catch(e => console.log(e));
+          })
+          .catch(e => console.log(e));*/
+      this.getLastRegisto();
+      this.getTodayRegistos(this.datepipe.transform(new Date(), 'yyyy-MM-dd'));
   }
 
     ngOnInit() {
-
 
     }
 
@@ -56,34 +79,31 @@ export class HomepagePage implements OnInit {
         console.log(ev.detail.value);
         switch (ev.detail.value){
             case'hoje':
-                const hoje = new Date().getDate();
-                console.log('Segment changed', new Date(2021,0, 4).toISOString());
-                this.getAllRegistos(new Date(2021, 0,4).toISOString(), new Date(2021, 0, 4).toISOString());
+                const Result = this.datepipe.transform(new Date(), 'yyyy-MM-dd');
+                this.getTodayRegistos(Result);
 
                 break;
             case'ontem':
-                const ontem = new Date().getDate() - 1;
-                this.getAllRegistos(ontem, ontem);
-                console.log(ontem);
+                const Ontem = this.datepipe.transform(new Date().setDate(new Date().getDate() - 1), 'yyyy-MM-dd');
+                console.log(Ontem);
+                this.getTodayRegistos(Ontem);
                 break;
             case'mes':
                 const date = new Date();
-                const IMes = new Date(date.getFullYear(), date.getMonth(), 1);
-                const FMes = new Date(date.getFullYear(), date.getMonth() + 1, 0);
-                this.getAllRegistos(new Date(2021, 0,1).toISOString(), new Date(2021, 0,31).toISOString());
+                const firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
+                const lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+                this.getAllRegistos(firstDay.toISOString(), lastDay.toISOString());
                 console.log('Segment changed', ev);
                 break;
             case'ano':
-                const Year = new Date(new Date().getFullYear(), 0, 1);
-                console.log('Segment changed', ev);
+                const Date1 = new Date();
+                const firstDayYear = new Date(Date1.getFullYear(), 0, 1);
+                const lastDayYear = new Date(Date1.getFullYear(), 11, 31);
+                this.getAllRegistos(firstDayYear.toISOString(), lastDayYear.toISOString());
                 break;
         }
     }
- /* ionViewWillEnter(){
-      this.getAllRegistos('', '');
-  }*/
-
-     getAllRegistos(query, query2){
+    getAllRegistos(query, query2){
           this.db.openDatabaseConnection().then((db: SQLiteObject) => {
               db.executeSql('SELECT * FROM Registos where DateAdd BETWEEN ? AND ? ORDER BY DateAdd DESC', [query, query2]).then((data) => {
                   this.registos = [];
@@ -92,20 +112,43 @@ export class HomepagePage implements OnInit {
                           this.registos.push(data.rows.item(i));
                       }
                   }
-                  const LastValue = this.registos[0];
-
-                  this.current = LastValue.Glucose;
-                  if (this.current <= 126){
-                      this.color = '#04b50a';
-                  }else if (this.current >= 127 && this.current < 226) {
-                      this.color = '#fabd05';
-                  }else{
-                      this.color = '#c42902';
-                  }
               }, (e) => {
                   console.log('Error: ' + JSON.stringify(e));
               });
           });
 }
+    getTodayRegistos(date){
+         console.log(date);
+         this.db.openDatabaseConnection().then((db: SQLiteObject) => {
+            db.executeSql('SELECT * FROM Registos where Data = ? ORDER BY DateAdd DESC', [date]).then((data) => {
+                this.registos = [];
+                if (data.rows.length > 0) {
+                    for (let i = 0; i < data.rows.length; i++) {
+                        this.registos.push(data.rows.item(i));
+                    }
+                }
+            }, (e) => {
+                console.log('Error: ' + JSON.stringify(e));
+            });
+        });
+    }
+    getLastRegisto(){
+        this.db.openDatabaseConnection().then((db: SQLiteObject) => {
+            db.executeSql('SELECT * FROM Registos ORDER BY DateAdd DESC LIMIT 1', []).then((data) => {
+                if (data.rows.length > 0){
+                    this.current = data.rows.item(0).Glucose;
+                }
+                if (this.current <= 126){
+                    this.color = '#04b50a';
+                }else if (this.current >= 127 && this.current < 226) {
+                    this.color = '#fabd05';
+                }else{
+                    this.color = '#c42902';
+                }
+            }, (e) => {
+                console.log('Error: ' + JSON.stringify(e));
+            });
+        });
+    }
 }
 

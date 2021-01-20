@@ -10,6 +10,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SQLite } from '@ionic-native/sqlite/ngx';
 import { NFC, Ndef } from '@ionic-native/nfc/ngx';
+import { Health } from '@ionic-native/health/ngx';
+
 
 
 
@@ -23,6 +25,7 @@ import { NFC, Ndef } from '@ionic-native/nfc/ngx';
     SQLite,
     NFC,
     Ndef,
+    Health,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
