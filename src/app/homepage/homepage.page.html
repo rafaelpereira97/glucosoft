@@ -44,7 +44,22 @@
       </ion-row>
     </ion-grid>-->
     <ion-card-content>
+
       <ion-row>
+        <ion-segment (ionChange)="segmentChanged($event)" value="hoje">
+          <ion-segment-button value="hoje">
+            <ion-label>Hoje</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="ontem">
+            <ion-label>Ontem</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="mes">
+            <ion-label>Este mês</ion-label>
+          </ion-segment-button>´
+          <ion-segment-button value="ano">
+            <ion-label>Este Ano</ion-label>
+          </ion-segment-button>
+        </ion-segment>
       <ion-list>
         <ion-item *ngFor="let medicao of registos">
           <ion-avatar style="background-color: #2dd36f" slot="start" *ngIf="medicao.Glucose <= 126">

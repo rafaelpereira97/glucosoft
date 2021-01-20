@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import {DbServiceService} from "../DB/db-service.service";
+import {DbServiceService} from '../DB/db-service.service';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-homepage',
   templateUrl: './homepage.page.html',
   styleUrls: ['./homepage.page.scss'],
+    providers: [DatePipe]
+
 })
 export class HomepagePage implements OnInit {
 
@@ -14,24 +17,51 @@ export class HomepagePage implements OnInit {
     color = '';
     registos: Array<any>;
 
-  constructor(private db: DbServiceService) {
+  constructor(private db: DbServiceService,public datepipe: DatePipe) {
 
   }
 
     ngOnInit() {
 
     }
+    segmentChanged(ev: any) {
+        console.log('Segment changed', ev);
+        console.log(ev.detail.value);
+        switch (ev.detail.value){
+            case'hoje':
+                const hoje = new Date().getDate();
+                console.log('Segment changed', new Date(2021,0, 4).toISOString());
+                this.getAllRegistos(new Date(2021, 0,4).toISOString(), new Date(2021, 0, 4).toISOString());
 
-  ionViewWillEnter(){
-      this.getAllRegistos();
-  }
+                break;
+            case'ontem':
+                const ontem = new Date().getDate() - 1;
+                this.getAllRegistos(ontem, ontem);
+                console.log(ontem);
+                break;
+            case'mes':
+                const date = new Date();
+                const IMes = new Date(date.getFullYear(), date.getMonth(), 1);
+                const FMes = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+                this.getAllRegistos(new Date(2021, 0,1).toISOString(), new Date(2021, 0,31).toISOString());
+                console.log('Segment changed', ev);
+                break;
+            case'ano':
+                const Year = new Date(new Date().getFullYear(), 0, 1);
+                console.log('Segment changed', ev);
+                break;
+        }
+    }
+ /* ionViewWillEnter(){
+      this.getAllRegistos('', '');
+  }*/
 
-     getAllRegistos(){
+     getAllRegistos(query, query2){
           this.db.openDatabaseConnection().then((db: SQLiteObject) => {
-              db.executeSql('SELECT * FROM Registos ORDER BY DateAdd DESC', []).then((data) => {
+              db.executeSql('SELECT * FROM Registos where DateAdd BETWEEN ? AND ? ORDER BY DateAdd DESC', [query, query2]).then((data) => {
                   this.registos = [];
-                  if(data.rows.length > 0) {
-                      for(let i = 0; i < data.rows.length; i++) {
+                  if (data.rows.length > 0) {
+                      for (let i = 0; i < data.rows.length; i++) {
                           this.registos.push(data.rows.item(i));
                       }
                   }
@@ -46,7 +76,7 @@ export class HomepagePage implements OnInit {
                       this.color = '#c42902';
                   }
               }, (e) => {
-                  console.log("Error: " + JSON.stringify(e));
+                  console.log('Error: ' + JSON.stringify(e));
               });
           });
 }
