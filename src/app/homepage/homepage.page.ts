@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import {DbServiceService} from '../DB/db-service.service';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
 import { DatePipe } from '@angular/common';
+import { NFC, Ndef } from '@ionic-native/nfc/ngx';
+import { ToastController } from '@ionic/angular';
+import {NavigationExtras, Router} from '@angular/router';
+
 
 @Component({
   selector: 'app-homepage',
@@ -17,13 +21,36 @@ export class HomepagePage implements OnInit {
     color = '';
     registos: Array<any>;
 
-  constructor(private db: DbServiceService,public datepipe: DatePipe) {
+  constructor(private db: DbServiceService, public datepipe: DatePipe,private nfc: NFC, private ndef: Ndef,public toastController: ToastController,private router: Router) {
+      this.nfc.addTagDiscoveredListener(() => {
 
+      }, (err) => {
+          console.log('error attaching ndef listener', err);
+      }).subscribe((event) => {
+          const navigationExtras: NavigationExtras = {
+              queryParams: {
+                  glucose: JSON.stringify(70)
+              }
+          };
+
+          this.router.navigate(['/nova-medicao'], navigationExtras);
+      });
   }
 
     ngOnInit() {
 
+
     }
+
+
+    async presentToast(texto) {
+        const toast = await this.toastController.create({
+            message: texto,
+            duration: 2000
+        });
+        toast.present();
+    }
+
     segmentChanged(ev: any) {
         console.log('Segment changed', ev);
         console.log(ev.detail.value);
