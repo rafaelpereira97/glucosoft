@@ -11,6 +11,7 @@ import { AppComponent } from './app.component';
 import { SQLite } from '@ionic-native/sqlite/ngx';
 import { NFC, Ndef } from '@ionic-native/nfc/ngx';
 import { Health } from '@ionic-native/health/ngx';
+import {LocalNotifications} from '@ionic-native/local-notifications/ngx';
 
 
 
@@ -26,6 +27,7 @@ import { Health } from '@ionic-native/health/ngx';
     NFC,
     Ndef,
     Health,
+    LocalNotifications,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
+
 
 @Component({
   selector: 'app-tab3',
@@ -7,6 +9,8 @@ import { Component } from '@angular/core';
 })
 export class Tab3Page {
 
-  constructor() {}
+  constructor(private localNotifications: LocalNotifications) { }
+
+  // tslint:disable-next-line:use-lifecycle-interface
 
 }
