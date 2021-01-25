@@ -12,6 +12,7 @@ import { SQLite } from '@ionic-native/sqlite/ngx';
 import { NFC, Ndef } from '@ionic-native/nfc/ngx';
 import { Health } from '@ionic-native/health/ngx';
 import {LocalNotifications} from '@ionic-native/local-notifications/ngx';
+import { TouchID } from '@ionic-native/touch-id/ngx';
 
 
 
@@ -28,6 +29,7 @@ import {LocalNotifications} from '@ionic-native/local-notifications/ngx';
     Ndef,
     Health,
     LocalNotifications,
+    TouchID,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
