@@ -6,7 +6,6 @@ import { NFC, Ndef } from '@ionic-native/nfc/ngx';
 import { ToastController } from '@ionic/angular';
 import {NavigationExtras, Router} from '@angular/router';
 import { Health } from '@ionic-native/health/ngx';
-import { TouchID } from '@ionic-native/touch-id/ngx';
 import { Chart } from 'chart.js';
 
 @Component({
@@ -37,7 +36,7 @@ export class HomepagePage implements OnInit {
                 public toastController: ToastController,
                 private router: Router,
                 private health: Health,
-                private touchId: TouchID) {
+                ) {
       this.nfc.addTagDiscoveredListener(() => {
 
       }, (err) => {
@@ -57,20 +56,8 @@ export class HomepagePage implements OnInit {
   }
 
     ngOnInit() {
-        this.touchId.isAvailable()
-            .then(
-                res => console.log('TouchID is available!'),
-                err => console.error('TouchID is not available', err)
-            );
-
-        this.touchId.verifyFingerprint('Scan your fingerprint please')
-            .then(
-                res => console.log('Ok', res),
-                err => console.error('Error', err)
-            );
         this.doughnutChartMethod();
         this.lineChartMethod();
-
     }
 
 

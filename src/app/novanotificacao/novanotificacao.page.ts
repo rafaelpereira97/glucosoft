@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {LocalNotifications} from '@ionic-native/local-notifications/ngx';
-import {NavController} from "@ionic/angular";
+import {NavController, Platform} from '@ionic/angular';
 
 @Component({
   selector: 'app-novanotificacao',
@@ -12,11 +12,12 @@ export class NovanotificacaoPage implements OnInit {
   NotificaoForm: FormGroup;
   constructor(private formBuilder: FormBuilder,
               private localNotifications: LocalNotifications,
-              public navCtrl: NavController) { }
+              public navCtrl: NavController,
+              public platform: Platform
+  ) { }
 
   ngOnInit() {
     this.NotificaoForm = this.createNotificaoFrom();
-
   }
   addNotificacao(){
     const Data = this.NotificaoForm.getRawValue();
@@ -25,7 +26,7 @@ export class NovanotificacaoPage implements OnInit {
       title: Data.TituloNoti,
       text: Data.TextoNofi,
       trigger: {at: new Date(new Date(Data.DateAdd))},
-      sound: null,
+      sound: this.setSound(),
       vibrate: true
     });
     this.navCtrl.navigateBack('tabs/tabs/tab2').then(() => {
@@ -40,5 +41,12 @@ export class NovanotificacaoPage implements OnInit {
       DateAdd: [new Date(), Validators.required],
 
     });
+  }
+  setSound() {
+    if (this.platform.is('android')) {
+      return 'file://assets/sounds/shame.mp3';
+    } else {
+      return 'file://assets/sounds/bell.mp3';
+    }
   }
 }
