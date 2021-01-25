@@ -1,25 +1,36 @@
 <ion-content style="max-height: 93%" [fullscreen]="true">
-  <ion-card>
+  <ion-card >
     <ion-card-header>
 <!--      <ion-card-subtitle>Card Subtitle</ion-card-subtitle>-->
       <ion-card-title>Última Medição</ion-card-title>
     </ion-card-header>
 
-    <ion-card-content>
-      <ion-grid>
-        <ion-row>
-          <ion-col class="ion-align-items-center">
-          <round-progress class="grafico" [semicircle]="true"
-                          [current]="current" [color]="color"
-                          [radius]="45" [stroke]="7" [max]="max">
-          </round-progress>
-            <h1 style="margin-top: -30%; text-align: center"><b>{{current}} Mg/L</b></h1>
-            <br><br><br>
-            <span class="ion-float-left">MIN</span>
-            <span class="ion-float-right">MAX</span>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
+    <ion-card-content >
+      <ion-slides pager="true" style="height: 250px" >
+        <ion-slide>
+          <ion-grid>
+            <ion-row>
+              <ion-col class="ion-align-items-center">
+                <round-progress class="grafico" [semicircle]="true"
+                                [current]="current" [color]="color"
+                                [radius]="45" [stroke]="7" [max]="max">
+                </round-progress>
+                <h1 style="margin-top: -30%; text-align: center"><b>{{current}} Mg/L</b></h1>
+                <br><br><br>
+                <span class="ion-float-left">MIN</span>
+                <span class="ion-float-right">MAX</span>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-slide>
+        <ion-slide>
+          <canvas #doughnutCanvas style="position: relative; height:20vh; width:40vw"></canvas>
+        </ion-slide>
+        <ion-slide>
+          <canvas #lineCanvas style="height:15vh; width:40vw"></canvas>
+        </ion-slide>
+      </ion-slides>
+
     </ion-card-content>
   </ion-card>
   <ion-card>

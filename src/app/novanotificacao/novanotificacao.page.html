@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>Inserir uma nova notificação</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+
+<ion-card>
+
+
+  <form [formGroup]="NotificaoForm" (ngSubmit)="addNotificacao()">
+    <ion-item>
+      <ion-label position="floating">Titulo da noficação</ion-label>
+      <ion-input formControlName="TituloNoti" type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Texto da notificação</ion-label>
+      <ion-input formControlName="TextoNofi" type="text"></ion-input>
+    </ion-item>
+    <ion-item >
+      <ion-label position="floating">Data da Medição</ion-label>
+      <ion-datetime formControlName="DateAdd" displayFormat="DD/MM/YYYY HH:mm:ss" display-timezone="utc" placeholder="Selecionar Data..."></ion-datetime>
+    </ion-item>
+    <ion-button style="width:100%" type="submit" shape="round">Guardar</ion-button>
+ </form>
+</ion-card>
+</ion-content>

@@ -16,7 +16,8 @@ import {RoundProgressModule} from 'angular-svg-round-progressbar';
     FormsModule,
     IonicModule,
     RoundProgressModule,
-    HomepagePageRoutingModule
+
+    HomepagePageRoutingModule,
   ],
   declarations: [HomepagePage]
 })

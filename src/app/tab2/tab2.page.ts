@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {LocalNotifications} from '@ionic-native/local-notifications/ngx';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-tab2',
@@ -7,21 +8,34 @@ import {LocalNotifications} from '@ionic-native/local-notifications/ngx';
   styleUrls: ['tab2.page.scss']
 })
 export class Tab2Page {
-
-  constructor(private localNotifications: LocalNotifications) {}
+  Notificoes: any;
+  constructor(private localNotifications: LocalNotifications, private router: Router) {}
 
   ngOnInit() {
-    console.log('Teste');
-    this.localNotifications.schedule([{
-      id: 1,
-      text: 'Multi ILocalNotification 1',
-      icon: 'http://example.com/icon.png'
-    }, {
-      id: 2,
-      title: 'Local ILocalNotification Example',
-      text: 'Multi ILocalNotification 2',
-      icon: 'http://example.com/icon.png'
-    }]);
+  this.localNotifications.getAll().then((result) => {
+       console.log(result);
+       this.Notificoes = result;
+       this.Notificoes.forEach(element => {
+          console.log(new Date(element.trigger.at));
+          element.trigger.at = new Date(element.trigger.at);
+      });
+
+    });
+ }
+  openNotificacao(){
+    this.router.navigate(['/notificacao']);
+  }
+  CancelNotification(notification: any){
+      console.log(notification);
+      this.localNotifications.cancelAll().then(r =>  { this.localNotifications.getAll().then((result) => {
+          console.log(r);
+          this.Notificoes = result;
+          this.Notificoes.forEach(element => {
+              element.trigger.at = new Date(element.trigger.at);
+          });
+
+      });
+      });
 
   }
 

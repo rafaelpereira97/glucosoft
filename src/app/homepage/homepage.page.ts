@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {DbServiceService} from '../DB/db-service.service';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
 import { DatePipe } from '@angular/common';
@@ -7,7 +7,7 @@ import { ToastController } from '@ionic/angular';
 import {NavigationExtras, Router} from '@angular/router';
 import { Health } from '@ionic-native/health/ngx';
 import { TouchID } from '@ionic-native/touch-id/ngx';
-
+import { Chart } from 'chart.js';
 
 @Component({
   selector: 'app-homepage',
@@ -23,14 +23,21 @@ export class HomepagePage implements OnInit {
     color = '';
     Segment: any;
     registos: Array<any>;
+    @ViewChild('barChart', { static: true }) barChart: ElementRef;
+    @ViewChild('lineCanvas', { static: true }) lineCanvas: ElementRef;
+    @ViewChild('doughnutCanvas', { static: true }) doughnutCanvas: ElementRef;
+    bars: any;
+    colorArray: any;
+    lineChart: any;
+    doughnutChart: any;
 
-  constructor(private db: DbServiceService,
-              public datepipe: DatePipe ,
-              private nfc: NFC, private ndef: Ndef,
-              public toastController: ToastController,
-              private router: Router,
-              private health: Health,
-              private touchId: TouchID) {
+    constructor(private db: DbServiceService,
+                public datepipe: DatePipe ,
+                private nfc: NFC, private ndef: Ndef,
+                public toastController: ToastController,
+                private router: Router,
+                private health: Health,
+                private touchId: TouchID) {
       this.nfc.addTagDiscoveredListener(() => {
 
       }, (err) => {
@@ -45,38 +52,24 @@ export class HomepagePage implements OnInit {
           this.router.navigate(['/nova-medicao'], navigationExtras);
       });
 
-      this.touchId.isAvailable()
-          .then(
-              res => console.log('TouchID is available!'),
-              err => console.error('TouchID is not available', err)
-          );
-
-      this.touchId.verifyFingerprint('Scan your fingerprint please')
-          .then(
-              res => console.log('Ok', res),
-              err => console.error('Error', err)
-          );
-
-      /*this.health.isAvailable()
-          .then((available: boolean) => {
-              console.log(available);
-              this.health.requestAuthorization([
-                  'distance', 'nutrition',
-                  {
-                      read: ['steps'],
-                      write: ['height', 'weight']
-                  }
-              ])
-                  .then(res => console.log(res))
-                  .catch(e => console.log(e));
-          })
-          .catch(e => console.log(e));*/
-
       this.getLastRegisto();
       this.getTodayRegistos(this.datepipe.transform(new Date(), 'yyyy-MM-dd'));
   }
 
     ngOnInit() {
+        this.touchId.isAvailable()
+            .then(
+                res => console.log('TouchID is available!'),
+                err => console.error('TouchID is not available', err)
+            );
+
+        this.touchId.verifyFingerprint('Scan your fingerprint please')
+            .then(
+                res => console.log('Ok', res),
+                err => console.error('Error', err)
+            );
+        this.doughnutChartMethod();
+        this.lineChartMethod();
 
     }
 
@@ -163,6 +156,104 @@ export class HomepagePage implements OnInit {
             }, (e) => {
                 console.log('Error: ' + JSON.stringify(e));
             });
+        });
+    }
+    createBarChart() {
+        this.bars = new Chart(this.barChart.nativeElement, {
+            type: 'bar',
+            data: {
+                labels: this.getDaysInMonth(1,2021),
+                datasets: [{
+                    label: 'Viewers in millions',
+                    data: [2.5, 3.8, 5, 6.9, 6.9, 7.5, 10, 17],
+                    backgroundColor: 'rgb(38, 194, 129)',
+                    borderColor: 'rgb(38, 194, 129)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+    }
+    getDaysInMonth(month, year) {
+        const date = new Date(year, month, 1);
+        const days = [];
+        let count = 0;
+        while (date.getMonth() === month) {
+            count += 1;
+            days.push(count);
+            date.setDate(date.getDate() + 1);
+        }
+        console.log(days);
+        return days;
+    }
+    lineChartMethod() {
+        this.lineChart = new Chart(this.lineCanvas.nativeElement, {
+            type: 'line',
+            data: {
+                labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+                datasets: [
+                    {
+                        label: 'Media de Medição por Mês',
+                        fill: false,
+                        lineTension: 0.1,
+                        backgroundColor: 'rgba(75,192,192,0.4)',
+                        borderColor: 'rgba(75,192,192,1)',
+                        borderCapStyle: 'butt',
+                        borderDash: [],
+                        borderDashOffset: 0.0,
+                        borderJoinStyle: 'miter',
+                        pointBorderColor: 'rgba(75,192,192,1)',
+                        pointBackgroundColor: '#fff',
+                        pointBorderWidth: 1,
+                        pointHoverRadius: 5,
+                        pointHoverBackgroundColor: 'rgba(75,192,192,1)',
+                        pointHoverBorderColor: 'rgba(220,220,220,1)',
+                        pointHoverBorderWidth: 2,
+                        pointRadius: 1,
+                        pointHitRadius: 10,
+                        data: [90, 110, 100, 81, 140, 89, 130, 90, 100, 80, 130, 100],
+                        spanGaps: false,
+                    }
+                ]
+            }
+        });
+    }
+    doughnutChartMethod() {
+        this.doughnutChart = new Chart(this.doughnutCanvas.nativeElement, {
+            type: 'doughnut',
+            data: {
+                labels: ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta','Sabado','Domingo'],
+                datasets: [{
+                    label: '# of Votes',
+                    data: [100, 120, 130, 70, 130,120,140],
+                    backgroundColor: [
+                        'rgba(255, 159, 64, 0.2)',
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(255, 134, 13, 0.2)',
+                        'rgba(5, 252, 100, 0.2)',
+                    ],
+                    hoverBackgroundColor: [
+                        '#FFCE56',
+                        '#FF6384',
+                        '#36A2EB',
+                        '#FFCE56',
+                        '#FF6384',
+                        '#ffcd9c',
+                        '#9cffc2',
+                    ]
+                }]
+            }
         });
     }
 }

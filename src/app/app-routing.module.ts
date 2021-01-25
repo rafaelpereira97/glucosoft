@@ -22,9 +22,17 @@ const routes: Routes = [
     loadChildren: () => import('./nova-medicao/nova-medicao.module').then( m => m.NovaMedicaoPageModule)
   },
   {
+    path: 'notificacao',
+    loadChildren: () => import('./novanotificacao/novanotificacao.module').then( m => m.NovanotificacaoPageModule)
+  },
+  {
     path: '',
     loadChildren: () => import('./wizard/wizard.module').then( m => m.WizardPageModule),
     canActivate: [WizardguardGuard]
+  },
+  {
+    path: 'novanotificacao',
+    loadChildren: () => import('./novanotificacao/novanotificacao.module').then( m => m.NovanotificacaoPageModule)
   }
 
 ];
