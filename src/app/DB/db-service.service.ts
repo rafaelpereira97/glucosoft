@@ -19,9 +19,12 @@ export class DbServiceService {
               .catch(e => console.log(e));
 
 
+  db.executeSql('create table User (Id INTEGER PRIMARY KEY  Autoincrement ,Nome TEXT, Idade INTEGER, Genero TEXT, Peso TEXT , Altura TEXT , TipoDiabetes TEXT)', [])
+              .then(() => console.log('Executed SQL'))
+              .catch(e => console.log(e));
+
       })
       .catch(e => console.log(e));
-
   }
 
 
@@ -41,7 +44,7 @@ export class DbServiceService {
     }
 
     getRegistos(){
-        return this.database.executeSql("SELECT * FROM Registos");
+        return this.database.executeSql('SELECT * FROM Registos');
     }
 
     openDatabaseConnection(){

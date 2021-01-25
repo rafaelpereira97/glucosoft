@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>wizard</ion-title>
+    <ion-title>Bem Vindo !</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -9,28 +9,58 @@
 
     <ion-slide>
       <div class="slide">
-        <img src="https://ionicframework.com/docs/demos/api/slides/slide-1.png"/>
-        <h2>Welcome</h2>
-        <p>The <b>ionic conference app</b> is a practical preview of the ionic framework in action, and a demonstration of proper code use.</p>
+        <h2>Bem-Vindo ao Glucosoft!</h2>
+        <p>Por favor preencha a sua ficha com todos os seus dados pessoais para uma melhor experiência</p>
+        <ion-item>
+          <ion-label position="floating">Nome Completo</ion-label>
+          <ion-input type="text" [(ngModel)]="nome"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Idade</ion-label>
+          <ion-input type="number" [(ngModel)]="idade"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Gênero</ion-label>
+          <ion-select [(ngModel)]="genero" placeholder="Selecionar Gênero...">
+            <ion-select-option value="f">Feminino</ion-select-option>
+            <ion-select-option value="m">Masculino</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Peso </ion-label>
+          <ion-input type="number" [(ngModel)]="peso"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Altura</ion-label>
+          <ion-input type="number" [(ngModel)]="altura"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Tipo de Diabates</ion-label>
+          <ion-select [(ngModel)]="tipo_diabetes" placeholder="Selecionar Tipo de Diabetes...">
+            <ion-select-option value="1">Tipo I</ion-select-option>
+            <ion-select-option value="2">Tipo II</ion-select-option>
+            <ion-select-option value="3">Tipo III</ion-select-option>
+          </ion-select>
+        </ion-item>
       </div>
     </ion-slide>
 
     <ion-slide>
-      <img src="https://ionicframework.com/docs/demos/api/slides/slide-2.png"/>
-      <h2>What is Ionic?</h2>
-      <p><b>Ionic Framework</b> is an open source SDK that enables developers to build high quality mobile apps with web technologies like HTML, CSS, and JavaScript.</p>
+      <img src="/assets/wizard/image0.png"/>
+      <h2>O que é a Glucosoft?</h2>
+      <p><b>Glucosoft</b> é uma aplicação que o vai ajudar no seu dia a dia a controlar a diabtes com recurso a grafícos intuitivos e tabelas de registos.</p>
     </ion-slide>
 
     <ion-slide>
-      <img src="https://ionicframework.com/docs/demos/api/slides/slide-3.png"/>
-      <h2>What is Ionic Appflow?</h2>
-      <p><b>Ionic Appflow</b> is a powerful set of services and features built on top of Ionic Framework that brings a totally new level of app development agility to mobile dev teams.</p>
+      <img src="/assets/wizard/calcInsulina.png"/>
+      <h2>Calculadora de Insulina</h2>
+      <p>Com a <b>Calculadora de Insulina</b> poderá em qualquer altura do dia saber exatamente a dose que terá de administrar.</p>
     </ion-slide>
 
     <ion-slide>
       <img src="https://ionicframework.com/docs/demos/api/slides/slide-4.png"/>
-      <h2>Ready to Play?</h2>
-      <ion-button (click)="FinishWizard()" fill="clear">Continue <ion-icon slot="end" name="arrow-forward"></ion-icon></ion-button>
+      <h2>Terminar Configuração?</h2>
+      <ion-button (click)="FinishWizard()" fill="clear">Terminar <ion-icon slot="end" name="arrow-forward"></ion-icon></ion-button>
     </ion-slide>
 
   </ion-slides>

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import { Storage } from '@ionic/storage';
+import {DbServiceService} from '../DB/db-service.service';
+import {SQLiteObject} from '@ionic-native/sqlite/ngx';
 
 @Component({
   selector: 'app-wizard',
@@ -8,13 +10,28 @@ import { Storage } from '@ionic/storage';
   styleUrls: ['./wizard.page.scss'],
 })
 export class WizardPage implements OnInit {
-
-  constructor(private router: Router, private storage: Storage) { }
+  nome;
+  idade;
+  genero;
+  peso;
+  altura;
+  tipo_diabetes;
+  constructor(private router: Router, private storage: Storage, private db: DbServiceService) { }
 
   ngOnInit() {
   }
   FinishWizard(): void {
     this.storage.set('anserdwizard', false);
+    this.saveUser();
     this.router.navigate(['/tabs/tabs/homepage']);
+  }
+  saveUser(){
+    this.db.openDatabaseConnection().then((db: SQLiteObject) => {
+      db.executeSql('INSERT INTO User (Id,Nome,Idade,Genero,Peso,Altura,TipoDiabetes) VALUES (?,?,?,?,?,?,?)', [1, this.nome, this.idade, this.genero, this.peso, this.altura, this.tipo_diabetes]).then((data) => {
+        console.log('DATAAA: ' + data);
+      }, (e) => {
+        console.log('Erro ao criar utilizador: ' + JSON.stringify(e));
+      });
+    });
   }
 }

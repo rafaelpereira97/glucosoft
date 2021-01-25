@@ -1,23 +1,18 @@
 <ion-header class="ion-no-border">
   <ion-toolbar>
-    <ion-buttons slot="end">
-      <ion-button color="dark"  >
-        Done
-      </ion-button>
-    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <div class="ion-padding ion-text-center">
     <ion-avatar class="avatar-lg">
-      <img src="https://scontent.flis7-1.fna.fbcdn.net/v/t1.0-9/13686540_1437368166292470_667529246415866049_n.jpg?_nc_cat=111&ccb=2&_nc_sid=09cbfe&_nc_ohc=Yj83uvqpUlwAX8Lgzs4&_nc_ht=scontent.flis7-1.fna&oh=6e9780dbfd1f769ca91abccf73a7d5f8&oe=5FCFA09D" alt="">
+      <img src="https://www.kindpng.com/picc/m/78-786207_user-avatar-png-user-avatar-icon-png-transparent.png" alt="">
     </ion-avatar>
-    <h3><strong>Hieu Pham</strong></h3>
+    <h3><strong>{{ nome }}</strong></h3>
   </div>
 
   <ion-list>
-    <ion-item detail>
+<!--    <ion-item detail>
       <ion-icon name="checkmark-done-circle" color="success" slot="start"></ion-icon>
       <ion-label>
         Active Status
@@ -35,50 +30,56 @@
       <ion-label>
         Mobile number
       </ion-label>
-    </ion-item>
+    </ion-item>-->
 
     <ion-list-header class="list-header-custom">
-      Preferences
+      Informações Pessoais
     </ion-list-header>
-    <ion-item detail>
-      <ion-icon name="notifications-circle" color="tertiary" slot="start"></ion-icon>
+    <ion-item>
+      <ion-icon name="walk-outline" color="tertiary" slot="start"></ion-icon>
       <ion-label>
-        Notification & sounds
+        Idade
       </ion-label>
-      <ion-note slot="end">On</ion-note>
+      <ion-note slot="end">{{ idade }}</ion-note>
     </ion-item>
-    <ion-item detail>
-      <ion-icon name="people" color="tertiary" slot="start"></ion-icon>
+    <ion-item>
+      <ion-icon name="transgender-outline" color="tertiary" slot="start"></ion-icon>
       <ion-label>
-        People
+        Gênero
       </ion-label>
+      <ion-note slot="end">{{ genero }}</ion-note>
     </ion-item>
-    <ion-item detail>
-      <ion-icon name="chatbubble" color="primary" slot="start"></ion-icon>
+    <ion-item>
+      <ion-icon name="accessibility-outline" color="tertiary" slot="start"></ion-icon>
       <ion-label>
-        Messaging settings
+        Peso
       </ion-label>
+      <ion-note slot="end">{{ peso }}</ion-note>
     </ion-item>
-    <ion-item detail>
-      <ion-icon name="albums" color="danger" slot="start"></ion-icon>
+    <ion-item>
+      <ion-icon name="body-outline" color="tertiary" slot="start"></ion-icon>
       <ion-label>
-        Story
+        Altura
       </ion-label>
+      <ion-note slot="end">{{ altura }}</ion-note>
     </ion-item>
-    <ion-item detail lines="none">
-      <ion-icon name="lock-closed" color="dark" slot="start"></ion-icon>
+    <ion-item>
+      <ion-icon name="water-outline" color="tertiary" slot="start"></ion-icon>
       <ion-label>
-        Secret conversations
+        Tipo de Diabetes
       </ion-label>
+      <ion-note slot="end">{{ tipoDiabetes }}</ion-note>
+    </ion-item>
+    <ion-item>
+      <ion-icon name="pizza-outline" color="tertiary" slot="start"></ion-icon>
+      <ion-label>
+        IMC
+      </ion-label>
+      <ion-note slot="end">{{ imc }}</ion-note>
     </ion-item>
 
     <ion-list-header></ion-list-header>
-    <ion-item button lines="none" href="https://takethatdesign.com" target="_blank">
-      <ion-icon name="open-outline" slot="start" color="primary"></ion-icon>
-      <ion-label color="primary">
-        Visit <strong>Take That Design</strong>
-      </ion-label>
-    </ion-item>
+
     <ion-list-header></ion-list-header>
   </ion-list>
 </ion-content>

@@ -43,7 +43,7 @@ export class HomepagePage implements OnInit {
           this.router.navigate(['/nova-medicao'], navigationExtras);
       });
 
-   /*   this.health.isAvailable()
+      /*this.health.isAvailable()
           .then((available: boolean) => {
               console.log(available);
               this.health.requestAuthorization([
@@ -57,6 +57,7 @@ export class HomepagePage implements OnInit {
                   .catch(e => console.log(e));
           })
           .catch(e => console.log(e));*/
+
       this.getLastRegisto();
       this.getTodayRegistos(this.datepipe.transform(new Date(), 'yyyy-MM-dd'));
   }
