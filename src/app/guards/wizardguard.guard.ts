@@ -18,7 +18,7 @@ export class WizardguardGuard implements CanActivate {
       result = val;
       if (!result && val != null) {
         this.router.navigate(['/tabs/tabs/homepage']);
-        this.touchId.isAvailable()
+       /* this.touchId.isAvailable()
             .then(
                 res => console.log('TouchID is available!'),
                 err => console.error('TouchID is not available', err)
@@ -28,7 +28,7 @@ export class WizardguardGuard implements CanActivate {
             .then(
                 res => console.log('Ok', res),
                 err => console.error('Error', err)
-            );
+            );*/
       }else {
         this.router.navigate(['']);
         result = false;

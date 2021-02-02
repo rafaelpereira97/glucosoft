@@ -38,7 +38,7 @@ export class NovanotificacaoPage implements OnInit {
     return this.formBuilder.group({
       TituloNoti: ['', Validators.required],
       TextoNofi: ['' , Validators.required],
-      DateAdd: [new Date(), Validators.required],
+      DateAdd: ['', Validators.required],
 
     });
   }

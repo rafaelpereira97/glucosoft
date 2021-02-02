@@ -19,7 +19,7 @@ export class DbServiceService {
               .catch(e => console.log(e));
 
 
-  db.executeSql('create table User (Id INTEGER PRIMARY KEY  Autoincrement ,Nome TEXT, Idade INTEGER, Genero TEXT, Peso TEXT , Altura TEXT , TipoDiabetes TEXT)', [])
+  db.executeSql('create table User (Id INTEGER PRIMARY KEY  Autoincrement ,Nome TEXT, Idade INTEGER, Genero TEXT, Peso TEXT , Altura TEXT , TipoDiabetes TEXT, Foto Text,IC TEXT, ISF TEXT, Target TEXT)', [])
               .then(() => console.log('Executed SQL'))
               .catch(e => console.log(e));
 

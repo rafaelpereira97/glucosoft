@@ -23,12 +23,12 @@
     <ion-card-content>
       <form [formGroup]="CalculaForm" (ngSubmit)="CalculaInsulina()">
       <ion-item>
-        <ion-label position="floating">Percentagem Receitada</ion-label>
-        <ion-input type="number" clearInput formControlName="PercentagemR"></ion-input>
+        <ion-label position="floating">Valor da ultima medição se açucar no sange</ion-label>
+        <ion-input type="number" clearInput formControlName="Glucose"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label position="floating">Tamanho do Frasco</ion-label>
-        <ion-input type="number" clearInput formControlName="TamanhoDoFrasco"></ion-input>
+        <ion-label position="floating">Carbo Hidratos</ion-label>
+        <ion-input type="number" clearInput formControlName="Carbohydrates"></ion-input>
       </ion-item>
 
         <ion-button style="width:100%;margin-top: 30px" type="submit" shape="round">Calcular</ion-button>

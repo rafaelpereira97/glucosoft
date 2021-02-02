@@ -27,7 +27,7 @@ export class Tab2Page {
   }
   CancelNotification(notification: any){
       console.log(notification);
-      this.localNotifications.cancelAll().then(r =>  { this.localNotifications.getAll().then((result) => {
+      this.localNotifications.cancel(notification.id).then(r =>  { this.localNotifications.getAll().then((result) => {
           console.log(r);
           this.Notificoes = result;
           this.Notificoes.forEach(element => {

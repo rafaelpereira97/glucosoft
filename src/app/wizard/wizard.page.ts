@@ -16,6 +16,10 @@ export class WizardPage implements OnInit {
   peso;
   altura;
   tipo_diabetes;
+  IC;
+  ISF;
+  Target;
+
   constructor(private router: Router, private storage: Storage, private db: DbServiceService) { }
 
   ngOnInit() {
@@ -27,7 +31,8 @@ export class WizardPage implements OnInit {
   }
   saveUser(){
     this.db.openDatabaseConnection().then((db: SQLiteObject) => {
-      db.executeSql('INSERT INTO User (Id,Nome,Idade,Genero,Peso,Altura,TipoDiabetes) VALUES (?,?,?,?,?,?,?)', [1, this.nome, this.idade, this.genero, this.peso, this.altura, this.tipo_diabetes]).then((data) => {
+      // tslint:disable-next-line:max-line-length
+      db.executeSql('INSERT INTO User (Id,Nome,Idade,Genero,Peso,Altura,TipoDiabetes,IC,ISF,Target) VALUES (?,?,?,?,?,?,?,?,?,?)', [1, this.nome, this.idade, this.genero, this.peso, this.altura, this.tipo_diabetes, this.IC, this.ISF, this.Target]).then((data) => {
         console.log('DATAAA: ' + data);
       }, (e) => {
         console.log('Erro ao criar utilizador: ' + JSON.stringify(e));

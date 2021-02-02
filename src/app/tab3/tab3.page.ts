@@ -17,6 +17,9 @@ export class Tab3Page {
   altura: number;
   tipoDiabetes: string;
   imc: number;
+  IC:number;
+  ISF:number;
+  Target:number;
 
   constructor(private db: DbServiceService) {
     this.db.openDatabaseConnection().then((db: SQLiteObject) => {
@@ -29,6 +32,9 @@ export class Tab3Page {
         this.altura = user.Altura;
         this.tipoDiabetes = user.TipoDiabetes;
         this.imc = Math.round((this.peso / (this.altura * this.altura)));
+        this.IC = user.IC;
+        this.ISF = user.ISF;
+        this.Target = user.Target;
       }, (e) => {
         console.log('Erro ao criar utilizador: ' + JSON.stringify(e));
       });
