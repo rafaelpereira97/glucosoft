@@ -1,16 +1,13 @@
-import { Component } from '@angular/core';
-import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
+import { Component, OnInit } from '@angular/core';
 import {DbServiceService} from '../DB/db-service.service';
 import {SQLiteObject} from '@ionic-native/sqlite/ngx';
-import {Router} from '@angular/router';
-
 
 @Component({
-  selector: 'app-tab3',
-  templateUrl: 'tab3.page.html',
-  styleUrls: ['tab3.page.scss']
+  selector: 'app-editprofile',
+  templateUrl: './editprofile.page.html',
+  styleUrls: ['./editprofile.page.scss'],
 })
-export class Tab3Page {
+export class EditprofilePage implements OnInit {
   nome: string;
   idade: string;
   genero: string;
@@ -21,8 +18,7 @@ export class Tab3Page {
   IC:number;
   ISF:number;
   Target:number;
-
-  constructor(private db: DbServiceService, private router: Router) {
+  constructor(private db: DbServiceService) {
     this.db.openDatabaseConnection().then((db: SQLiteObject) => {
       db.executeSql('SELECT * FROM User WHERE Id = 1', []).then((data) => {
         const user = data.rows.item(0);
@@ -42,9 +38,16 @@ export class Tab3Page {
     });
   }
 
-  openEditProfilePage(){
-    this.router.navigate(['/editprofile']);
+  ngOnInit() {
   }
 
+  guardar(){
+    this.db.openDatabaseConnection().then((db: SQLiteObject) => {
+      db.executeSql('UPDATE User SET Id = ?, Nome = ?, Idade = ?, Genero = ?, Peso = ?, Altura = ?, TipoDiabetes = ?, IC = ?, ISF = ?, Target = ? WHERE Id = 1', [1,this.nome,this.idade,this.genero,this.peso,this.altura,this.tipoDiabetes,this.IC,this.ISF,this.Target]).then((data) => {
+      }, (e) => {
+        console.log('Erro ao criar utilizador: ' + JSON.stringify(e));
+      });
+    });
+  }
 
 }

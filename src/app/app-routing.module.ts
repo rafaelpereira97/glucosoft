@@ -33,6 +33,10 @@ const routes: Routes = [
   {
     path: 'novanotificacao',
     loadChildren: () => import('./novanotificacao/novanotificacao.module').then( m => m.NovanotificacaoPageModule)
+  },
+  {
+    path: 'editprofile',
+    loadChildren: () => import('./editprofile/editprofile.module').then( m => m.EditprofilePageModule)
   }
 
 ];

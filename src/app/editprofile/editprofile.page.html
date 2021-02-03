@@ -1,0 +1,75 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>Editar Perfil</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list-header class="list-header-custom">
+    Informações Pessoais
+  </ion-list-header>
+
+  <ion-item>
+    <ion-label position="stacked">
+      Idade
+    </ion-label>
+    <ion-input [(ngModel)]="idade" value="{{ idade }}"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="stacked">
+      Gênero
+    </ion-label>
+    <ion-input [(ngModel)]="genero" value="{{ genero }}"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="stacked">
+      Peso
+    </ion-label>
+    <ion-input [(ngModel)]="peso" value="{{ peso }}"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="stacked">
+      Altura
+    </ion-label>
+    <ion-input [(ngModel)]="altura" value="{{ altura }}"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="stacked">
+      Tipo de Diabetes
+    </ion-label>
+    <ion-input [(ngModel)]="tipoDiabetes" value="{{ tipoDiabetes }}"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="stacked">
+      IMC
+    </ion-label>
+    <ion-input [(ngModel)]="imc" value="{{ imc }}"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="stacked">
+      I:C
+    </ion-label>
+    <ion-input [(ngModel)]="IC" value="{{ IC }}"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="stacked">
+      ISF
+    </ion-label>
+    <ion-input [(ngModel)]="ISF" value="{{ ISF }}"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="stacked">
+      Objectivo de insulina
+    </ion-label>
+    <ion-input [(ngModel)]="Target" value="{{ Target }}"></ion-input>
+  </ion-item>
+
+  <br>
+  <ion-button style="width: 100%" (click)="guardar()" color="danger">
+    Guardar
+  </ion-button>
+</ion-content>
+
