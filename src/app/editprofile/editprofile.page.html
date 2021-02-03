@@ -22,7 +22,10 @@
     <ion-label position="stacked">
       Gênero
     </ion-label>
-    <ion-input [(ngModel)]="genero" value="{{ genero }}"></ion-input>
+    <ion-select [(ngModel)]="genero" placeholder="Selecionar Gênero...">
+      <ion-select-option value="f">Feminino</ion-select-option>
+      <ion-select-option value="m">Masculino</ion-select-option>
+    </ion-select>
   </ion-item>
   <ion-item>
     <ion-label position="stacked">

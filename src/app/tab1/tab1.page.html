@@ -31,7 +31,7 @@
         <ion-input type="number" clearInput formControlName="Carbohydrates"></ion-input>
       </ion-item>
 
-        <ion-button style="width:100%;margin-top: 30px" type="submit" shape="round">Calcular</ion-button>
+        <ion-button [disabled]="!CalculaForm.valid" style="width:100%;margin-top: 30px" type="submit" shape="round">Calcular</ion-button>
       </form>
     </ion-card-content>
   </ion-card>

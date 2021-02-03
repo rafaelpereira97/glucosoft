@@ -13,13 +13,20 @@ export class Tab1Page {
   TotalA = '0';
   Last: any;
   User: any;
-  constructor(private formBuilder: FormBuilder, private db: DbServiceService) {this.getLastRegisto();
-                                                                               this.getInfoUser(); }
-  ngOnInit(){
+  constructor(private formBuilder: FormBuilder, private db: DbServiceService) {
 
+  }
+  ngOnInit(){
     this.CalculaForm = this.createCalculaFrom();
   }
-  createCalculaFrom(): FormGroup
+
+  ionViewWillEnter() {
+    this.getLastRegisto();
+    this.getInfoUser();
+    this.CalculaForm = this.createCalculaFrom();
+  }
+
+    createCalculaFrom(): FormGroup
   {
     return this.formBuilder.group({
 
